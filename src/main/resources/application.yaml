@@ -1,0 +1,36 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/test_db
+    username: test_user
+    password: test1234
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 4
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: none # create, update, validate, none
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+  data: #Boot 3.5 이상에서는 새 prefix로 옮겨야 경고가 사라짐
+    redis:
+      host: localhost
+      port: 6379   # ✅ 새로운 권장 방식
+
+
+jwt:
+  issuer: "your-app"
+  access-exp-min: 15
+  refresh-exp-days: 14
+  secret: "change-this-to-"
+  cookie:
+    refresh-name: "RFT"
+    domain: "your.domain.com"
+    secure: true
+    http-only: true
+    same-site: "Strict"
