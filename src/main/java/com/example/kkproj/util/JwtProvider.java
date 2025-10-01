@@ -53,9 +53,22 @@ public class JwtProvider {
 
   }
 
-  public String generateRefreshToken(UserVo userVo){
+  public String generateRefreshToken(UserVo userVo, String refeshJti){
     Instant now = Instant.now();
 
+    Map<String, Object> principal =new HashMap();
+    principal.put(UF_ID, userVo.getUserId());
+    principal.put(UF_NAME, userVo.getUsername());
+
+    return Jwts.builder()
+            .setId(refeshJti) // refresh jti
+            .setSubject(String.valueOf(userVo.getUserId()))
+            .claim(CLAIM_USER, principal)
+            .setIssuer(props.getIssuer())
+            .setIssuedAt(Date.from(now))
+            .setExpiration(Date.from(now.plus(props.getRefreshExpDays(), ChronoUnit.DAYS)))
+            .signWith(key(), SignatureAlgorithm.HS256)
+            .compact();
 
   }
 
