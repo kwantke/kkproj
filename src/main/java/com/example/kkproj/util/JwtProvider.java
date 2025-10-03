@@ -53,7 +53,6 @@ public class JwtProvider {
 
   }
 
-
   public String generateRefreshToken(UserVo userVo, String refeshJti){
     Instant now = Instant.now();
 
