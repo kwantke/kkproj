@@ -55,7 +55,6 @@ public class JwtProvider {
 
   public String generateRefreshToken(UserVo userVo, String refeshJti){
     Instant now = Instant.now();
-
     Map<String, Object> principal =new HashMap();
     principal.put(UF_ID, userVo.getUserId());
     principal.put(UF_NAME, userVo.getUsername());
