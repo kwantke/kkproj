@@ -35,7 +35,7 @@ public class JwtProvider {
   public String generateAccessToken(UserVo userVo) {
 
     Instant now = Instant.now();
-    String jti = UUID.randomUUID().toString();
+    String jti = UUID.randomUUID().toString(); // jwt Token Id
 
     Map<String, Object> principal =new HashMap();
     principal.put(UF_ID, userVo.getUserId());

@@ -1,5 +1,6 @@
 package com.example.kkproj.config.filter;
 
+import com.example.kkproj.util.JwtProvider;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
@@ -8,6 +9,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -15,10 +17,20 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 @Slf4j
-public class JwtTokenFilter extends OncePerRequestFilter {
+@RequiredArgsConstructor
+public class JwtAuthFilter extends OncePerRequestFilter {
 
   private final JwtProvider jwtProvider;
   private final TokenStore tokenStore;
+
+  @Override
+  protected boolean shouldNotFilter(HttpServletRequest request) {
+    String path = request.getServletPath();
+
+    return path.startsWith("/auth/") || path.startsWith("health");
+
+  }
+
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
     final String header = request.getHeader(HttpHeaders.AUTHORIZATION);

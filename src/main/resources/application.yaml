@@ -19,7 +19,7 @@ spring:
         use_sql_comments: true
   data: #Boot 3.5 이상에서는 새 prefix로 옮겨야 경고가 사라짐
     redis:
-      host: localhost
+      host: 127.0.0.1
       port: 6379   # ✅ 새로운 권장 방식
 
 
