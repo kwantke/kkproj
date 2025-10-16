@@ -14,6 +14,7 @@ public class TokenStore {
   private final StringRedisTemplate redis;
 
   private static final String RT_KEY = "rt:%s";
+  private static final String RJ_KEY = "rj:%s";
   private static final String BL_KEY = "bl:at:%s";
 
 
@@ -27,6 +28,15 @@ public class TokenStore {
   public Optional<String> getRefreshJti(String userId) {
     String val = redis.opsForValue().get(RT_KEY.formatted(userId));
     return Optional.ofNullable(val);
+  }
+
+  // 사용된 refresh 토큰은 redis에 별도 등록하여 관리
+  public void markRefreshJtiUsed(String jti, Duration ttl) {
+    redis.opsForValue().set(RJ_KEY.formatted(jti),"used",ttl);
+  }
+
+  public boolean isRefreshJtiUsed(String jti) {
+    return redis.hasKey(RJ_KEY.formatted(jti)) == Boolean.TRUE;
   }
 
   public void deleteRefreshJti(String userId) {

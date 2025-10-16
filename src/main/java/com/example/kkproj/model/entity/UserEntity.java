@@ -1,5 +1,6 @@
 package com.example.kkproj.model.entity;
 
+import com.example.kkproj.model.UserRole;
 import com.example.kkproj.model.UserVo;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -28,6 +29,9 @@ public class UserEntity {
   @Column(nullable = false)
   private String password;
 
+  @Column(name="role")
+  private String role;
+
   @PrePersist
   public void PrePersist() {
     if (userId == null) {
@@ -35,14 +39,6 @@ public class UserEntity {
     }
   }
 
-  public static UserVo toVo(UserEntity entity) {
-    return UserVo.builder()
-            .id(entity.getId())
-            .userUuid(entity.getUserUuid())
-            .userId(entity.getUserId())
-            .userName(entity.getUsername())
-            .password(entity.getPassword())
-            .build();
-  }
+
 
 }

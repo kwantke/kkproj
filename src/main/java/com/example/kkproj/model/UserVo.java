@@ -1,11 +1,14 @@
 package com.example.kkproj.model;
 
+import com.example.kkproj.model.entity.UserEntity;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,7 +29,8 @@ public class UserVo implements UserDetails {
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return null;
+    if (userRole == null) return List.of();
+    return List.of(new SimpleGrantedAuthority(userRole.name()));
   }
 
   @Override
@@ -52,5 +56,16 @@ public class UserVo implements UserDetails {
   @Override
   public boolean isEnabled() {
     return UserDetails.super.isEnabled();
+  }
+
+  public static UserVo toVo(UserEntity entity) {
+    return UserVo.builder()
+            .id(entity.getId())
+            .userUuid(entity.getUserUuid())
+            .userId(entity.getUserId())
+            .userName(entity.getUsername())
+            .password(entity.getPassword())
+            .userRole(UserRole.fromString(entity.getRole()))
+            .build();
   }
 }

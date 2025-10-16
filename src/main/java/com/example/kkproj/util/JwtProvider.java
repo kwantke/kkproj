@@ -25,7 +25,7 @@ public class JwtProvider {
 
   // Claim Keys
   private static final String CLAIM_ROLES = "roles";
-  private static final String CLAIM_USER = "usr";
+  public static final String CLAIM_USER = "usr";
   private static final String UF_ID       = "id"; //UF : User Form
   private static final String UF_NAME     = "username";
   private static final String UF_GENDER   = "gender";
