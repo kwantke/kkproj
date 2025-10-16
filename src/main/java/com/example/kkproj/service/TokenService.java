@@ -8,9 +8,11 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
+import java.time.Instant;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -79,9 +81,19 @@ public class TokenService {
     return new TokenPair(newAccess, newRefresh);
   }
 
-  public void logout(String userId, String accessToken) {
+  public void logout(UserVo userVo, String accessToken) {
     // AccessToken 를 블랙리스트에 추가
-    //Jws<Claims> jws = jwtProvider
+    Jws<Claims> jws = jwtProvider.parse(accessToken);
+    Claims c = jws.getBody();
+    String atJti = jwtProvider.getJti(c);
+
+    Duration ttl = Duration.between(Instant.now(), c.getExpiration().toInstant());
+    if (!ttl.isNegative()) {
+      tokenStore.blacklistAccess(atJti, ttl);
+    }
+
+    // Refresh token 제거
+    tokenStore.deleteRefreshJti(userVo.getUserId());
   }
 
 }

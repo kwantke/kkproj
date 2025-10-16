@@ -13,6 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,6 +33,7 @@ public class AuthController {
   private final JwtProperties props;
   private final TokenService tokenService;
   private final UserService userService;
+
   @PostMapping("/login")
   public ResponseEntity<?> login(@RequestBody LoginRequest req, HttpServletResponse res) throws Exception {
     // 실제 인증 로직
@@ -40,7 +42,7 @@ public class AuthController {
 
     Authentication auth;
     // refreshToken -> HttpOnly 쿠키에 추가
-    cookieSupport.writeRefreshCookie(res, pair.refreshToken(),(int) Duration.ofDays(props.getRefreshExpDays()).getSeconds());
+    cookieSupport.writeRefreshCookie(res, pair.refreshToken(), (int) Duration.ofDays(props.getRefreshExpDays()).getSeconds());
 
     return ResponseEntity.ok()
             .header(HttpHeaders.AUTHORIZATION, "Bearer " + pair.accessToken())
@@ -61,5 +63,19 @@ public class AuthController {
     return ResponseEntity.ok()
             .header(HttpHeaders.AUTHORIZATION, "Bearer " + pair.accessToken())
             .body(Map.of("accessToken", pair.accessToken()));
+  }
+
+  @PostMapping("logout")
+  public ResponseEntity<?> logout(HttpServletRequest req, HttpServletResponse res, Authentication authentication) {
+    if (authentication instanceof UsernamePasswordAuthenticationToken token
+            && authentication.getPrincipal() instanceof UserVo userVo) {
+      String header = req.getHeader(HttpHeaders.AUTHORIZATION);
+      if (header != null && header.startsWith("Bearer ")) {
+        tokenService.logout(userVo,header.substring(7));
+      }
+    }
+    cookieSupport.clearRefreshCookie(res);
+
+    return ResponseEntity.ok().build();
   }
 }
