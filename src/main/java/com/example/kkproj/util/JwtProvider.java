@@ -3,6 +3,8 @@ package com.example.kkproj.util;
 
 import com.example.kkproj.model.UserVo;
 import com.example.kkproj.properties.JwtProperties;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -24,7 +26,7 @@ public class JwtProvider {
   // Claim Keys
   private static final String CLAIM_ROLES = "roles";
   private static final String CLAIM_USER = "usr";
-  private static final String UF_ID       = "id";
+  private static final String UF_ID       = "id"; //UF : User Form
   private static final String UF_NAME     = "username";
   private static final String UF_GENDER   = "gender";
 
@@ -70,6 +72,38 @@ public class JwtProvider {
             .compact();
 
   }
+
+  // token으로 claim 반환
+  public Jws<Claims> parse(String token) {
+
+    return Jwts.parserBuilder().setSigningKey(key()).build().parseClaimsJws(token);
+  }
+
+  public boolean isExpired(Claims c) {
+    Date exp = c.getExpiration();
+    return exp != null && exp.before(new Date());
+  }
+
+  // 토큰 고유 ID
+  public String getJti(Claims claims) {
+    return claims.getId();
+  }
+
+  // sub에서 userId 반환
+  public String getUserId(Claims c) {
+
+    String sub = c.getSubject();
+    if(sub == null) return null;
+
+    return sub;
+  }
+
+
+
+
+
+
+
 
 }
 

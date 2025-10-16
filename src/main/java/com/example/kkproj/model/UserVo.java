@@ -1,9 +1,6 @@
 package com.example.kkproj.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,10 +11,11 @@ import java.util.Collection;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Builder
 public class UserVo implements UserDetails {
 
-  private Integer id;
+  private Long id;
+  private String userUuid;
   private String userId;
   private String userName;
   private String password;

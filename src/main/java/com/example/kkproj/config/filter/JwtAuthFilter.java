@@ -1,5 +1,6 @@
 package com.example.kkproj.config.filter;
 
+import com.example.kkproj.config.redis.TokenStore;
 import com.example.kkproj.util.JwtProvider;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -40,7 +41,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
       return;
     }
 
-    final String token;
+    final String token = header.substring(7);;
 
     Jws<Claims> jws = jwtProvider.parse(token);
     Claims c = jws.getBody();
@@ -52,7 +53,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     String accessJti = jwtProvider.getJti(c);
 
     // 토큰 블랙리스트 확인
-    if (tokenStroe.isAccessBlacklisted(accessJti)) {
+    if (tokenStore.isAccessBlacklisted(accessJti)) {
       throw new JwtException("Access token blacklisted");
     }
 
