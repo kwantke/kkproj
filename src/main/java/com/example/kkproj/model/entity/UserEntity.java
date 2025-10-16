@@ -1,14 +1,15 @@
 package com.example.kkproj.model.entity;
 
-import com.example.kkproj.model.UserRole;
-import com.example.kkproj.model.UserVo;
+
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.UUID;
 
 @Entity
 @Getter
+@Setter
 @Table(name = "users")
 
 public class UserEntity {
@@ -34,7 +35,7 @@ public class UserEntity {
 
   @PrePersist
   public void PrePersist() {
-    if (userId == null) {
+    if (userUuid == null) {
       userUuid = UUID.randomUUID().toString();
     }
   }

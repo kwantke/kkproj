@@ -1,5 +1,6 @@
 package com.example.kkproj.controller;
 
+import com.example.kkproj.dto.JoinRequest;
 import com.example.kkproj.dto.LoginRequest;
 import com.example.kkproj.model.UserVo;
 import com.example.kkproj.properties.JwtProperties;
@@ -77,5 +78,11 @@ public class AuthController {
     cookieSupport.clearRefreshCookie(res);
 
     return ResponseEntity.ok().build();
+  }
+
+  @PostMapping("/join")
+  public ResponseEntity<?> join(@RequestBody JoinRequest req) {
+    UserVo user = userService.join(req);
+    return ResponseEntity.ok(user);
   }
 }

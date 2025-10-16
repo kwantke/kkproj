@@ -20,7 +20,7 @@ public class UserVo implements UserDetails {
   private Long id;
   private String userUuid;
   private String userId;
-  private String userName;
+  private String username;
   private String password;
   private UserRole userRole;
   private Timestamp registeredAt;
@@ -63,7 +63,7 @@ public class UserVo implements UserDetails {
             .id(entity.getId())
             .userUuid(entity.getUserUuid())
             .userId(entity.getUserId())
-            .userName(entity.getUsername())
+            .username(entity.getUsername())
             .password(entity.getPassword())
             .userRole(UserRole.fromString(entity.getRole()))
             .build();

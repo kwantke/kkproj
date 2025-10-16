@@ -35,8 +35,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
   @Override
   protected boolean shouldNotFilter(HttpServletRequest request) {
     String path = request.getServletPath();
+    return path.equals("/auth/login")
+            || path.equals("/auth/refresh")
+            || path.equals("/auth/join")
+            || path.startsWith("/health");   // ✅ /auth/logout 은 제외하지 않음
 
-    return path.startsWith("/auth/") || path.startsWith("health");
 
   }
 
@@ -49,7 +52,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
       return;
     }
 
-    final String token = header.substring(7);;
+    final String token = header.substring(7);
     try {
 
 
@@ -73,7 +76,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
       UserDetails user = userService.loadUserByUsername(userId);
       UsernamePasswordAuthenticationToken auth =
               new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-
+      SecurityContextHolder.getContext().setAuthentication(auth); //실제 인증됨
     } catch (JwtException e) {
       // 인증 실패 -> 컨텍스트 비움(accessEntryPoint에서 401 처리)
       SecurityContextHolder.clearContext();

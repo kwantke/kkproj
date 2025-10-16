@@ -27,7 +27,7 @@ jwt:
   issuer: "your-app"
   access-exp-min: 15
   refresh-exp-days: 14
-  secret: "change-this-to-"
+  secret: "this-is-a-very-long-256bit-secret-key-at-least-32-bytes-please-keep-going-........"
   cookie:
     refresh-name: "RFT"
     domain: "your.domain.com"

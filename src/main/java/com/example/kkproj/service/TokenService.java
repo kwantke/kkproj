@@ -4,6 +4,7 @@ import com.example.kkproj.config.redis.TokenStore;
 import com.example.kkproj.model.UserVo;
 import com.example.kkproj.properties.JwtProperties;
 import com.example.kkproj.util.JwtProvider;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
@@ -15,6 +16,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import static com.example.kkproj.util.JwtProvider.CLAIM_USER;
@@ -69,7 +71,12 @@ public class TokenService {
     Duration rttl = Duration.ofDays(props.getRefreshExpDays());
     tokenStore.markRefreshJtiUsed(presentedJti, rttl);
 
-    UserVo userVo = (UserVo) c.get(CLAIM_USER);
+    // Map으로 먼저 받는다
+    Map<String, Object> map = c.get(CLAIM_USER, Map.class);
+
+// Jackson으로 UserVo 변환
+    ObjectMapper mapper = new ObjectMapper();
+    UserVo userVo = mapper.convertValue(map, UserVo.class);
     // 새 토근 발급
     String newAccess = jwtProvider.generateAccessToken(userVo);
     String newRjti = UUID.randomUUID().toString();
