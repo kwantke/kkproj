@@ -35,3 +35,11 @@ jwt:
     secure: true
     http-only: true
     same-site: "Strict"
+
+logging:
+  level:
+    root: TRACE         # 기본 로그 레벨 (INFO 이상 출력)
+#    com.example.kkproj: TRACE  # 패키지 단위로 TRACE 활성화
+#    org.springframework.web: DEBUG  # 웹 요청 디버깅용 (선택)
+#  file:
+#    name: logs/app.log  # 로그 파일로도 출력하려면
