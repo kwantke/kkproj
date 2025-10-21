@@ -25,12 +25,13 @@ spring:
 
 jwt:
   issuer: "your-app"
-  access-exp-min: 15
+  access-exp-min: 150
   refresh-exp-days: 14
   secret: "this-is-a-very-long-256bit-secret-key-at-least-32-bytes-please-keep-going-........"
   cookie:
     refresh-name: "RFT"
-    domain: "your.domain.com"
+    #domain: "your.domain.com"
+    domain: "localhost"
     secure: true
     http-only: true
     same-site: "Strict"

@@ -38,7 +38,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     return path.equals("/auth/login")
             || path.equals("/auth/refresh")
             || path.equals("/auth/join")
-            || path.startsWith("/health");   // ✅ /auth/logout 은 제외하지 않음
+            || path.startsWith("/health")
+
+    ;
 
 
   }
