@@ -1,9 +1,11 @@
 package com.example.kkproj.domain;
 
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.Random;
 
+@ToString
 @Getter
 public class ShortenUrl {
   private String originalUrl;

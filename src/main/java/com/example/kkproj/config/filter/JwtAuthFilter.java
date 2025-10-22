@@ -81,6 +81,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
       SecurityContextHolder.getContext().setAuthentication(auth); //실제 인증됨
     } catch (JwtException e) {
       // 인증 실패 -> 컨텍스트 비움(accessEntryPoint에서 401 처리)
+      //clearContext : 인증 정보저장소를 비우는 작업
       SecurityContextHolder.clearContext();
     }
     filterChain.doFilter(request, response);

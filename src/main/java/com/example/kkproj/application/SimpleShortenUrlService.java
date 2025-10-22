@@ -1,5 +1,6 @@
 package com.example.kkproj.application;
 
+import com.example.kkproj.domain.exception.ErrorCode;
 import com.example.kkproj.domain.exception.LackOfShortenUrlKeyException;
 import com.example.kkproj.domain.exception.NotFoundShortenUrlException;
 import com.example.kkproj.domain.ShortenUrl;
@@ -8,8 +9,10 @@ import com.example.kkproj.presentation.dto.ShortenUrlCreateRequestDto;
 import com.example.kkproj.presentation.dto.ShortenUrlCreateResponseDto;
 import com.example.kkproj.presentation.dto.ShortenUrlInformationDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class SimpleShortenUrlService {
@@ -23,12 +26,12 @@ public class SimpleShortenUrlService {
     String shortenUrlKey = getUniqueShortenUrlKey();
 
     ShortenUrl shortenUrl = new ShortenUrl(originalUrl, shortenUrlKey);
-
-
     shortenUrlRepository.saveShortenUrl(shortenUrl);
+    log.info("shortenUrl 생성: {}", shortenUrl);
 
     ShortenUrlCreateResponseDto shortenUrlCreateResponseDto
             = new ShortenUrlCreateResponseDto(shortenUrl);
+
 
     return shortenUrlCreateResponseDto;
   }
@@ -37,7 +40,7 @@ public class SimpleShortenUrlService {
     ShortenUrl shortenUrl = shortenUrlRepository.findShortenUrlByShortenUrlKey(shortenUrlKey);
 
     if (null == shortenUrl) {
-      throw new NotFoundShortenUrlException();
+      throw new NotFoundShortenUrlException(ErrorCode.NOT_FOUND_SHORTENURL,String.format("shortenUrlKey= %s",shortenUrlKey));
     }
     ShortenUrlInformationDto shortenUrlInformationDto = new ShortenUrlInformationDto(shortenUrl);
     return shortenUrlInformationDto;
@@ -47,7 +50,7 @@ public class SimpleShortenUrlService {
     ShortenUrl shortenUrl = shortenUrlRepository.findShortenUrlByShortenUrlKey(shortenUrlKey);
 
     if (null == shortenUrl) {
-      throw new NotFoundShortenUrlException();
+      throw new NotFoundShortenUrlException(ErrorCode.NOT_FOUND_SHORTENURL);
     }
     shortenUrl.increaseRedirectCount();
     shortenUrlRepository.saveShortenUrl(shortenUrl);

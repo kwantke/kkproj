@@ -1,4 +1,4 @@
-package com.example.kkproj.config;
+package com.example.kkproj.config.security;
 
 import com.example.kkproj.config.filter.JwtAuthFilter;
 import jakarta.servlet.http.HttpServletResponse;
@@ -30,7 +30,7 @@ public class SecurityConfig {
     http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
     http.exceptionHandling(e-> e
-            .authenticationEntryPoint((req, res, ex) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED))
+            .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
             .accessDeniedHandler((req, res, ex) -> res.sendError(HttpServletResponse.SC_FORBIDDEN))
     );
 

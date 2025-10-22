@@ -23,6 +23,7 @@ spring:
       port: 6379   # ✅ 새로운 권장 방식
 
 
+
 jwt:
   issuer: "your-app"
   access-exp-min: 150
@@ -38,8 +39,9 @@ jwt:
 
 logging:
   level:
-    root: TRACE         # 기본 로그 레벨 (INFO 이상 출력)
-#    com.example.kkproj: TRACE  # 패키지 단위로 TRACE 활성화
+#    root: TRACE         # 기본 로그 레벨 (INFO 이상 출력)
+    com.example.kkproj: TRACE  # 패키지 단위로 TRACE 활성화
+  config: classpath:logback-dev.xml
 #    org.springframework.web: DEBUG  # 웹 요청 디버깅용 (선택)
 #  file:
 #    name: logs/app.log  # 로그 파일로도 출력하려면
