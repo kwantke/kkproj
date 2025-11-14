@@ -1,25 +1,22 @@
-package com.example.kkproj.service;
+package com.example.kkproj.application;
 
-import com.example.kkproj.config.redis.TokenStore;
-import com.example.kkproj.model.UserVo;
+import com.example.kkproj.infrastructure.config.redis.TokenStore;
+import com.example.kkproj.domain.UserVo;
 import com.example.kkproj.properties.JwtProperties;
-import com.example.kkproj.util.JwtProvider;
+import com.example.kkproj.infrastructure.config.jwt.JwtProvider;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import static com.example.kkproj.util.JwtProvider.CLAIM_USER;
+import static com.example.kkproj.infrastructure.config.jwt.JwtProvider.CLAIM_USER;
 
 @Service
 @RequiredArgsConstructor

@@ -1,19 +1,18 @@
-package com.example.kkproj.controller;
+package com.example.kkproj.presentation.controller;
 
-import com.example.kkproj.dto.JoinRequest;
-import com.example.kkproj.dto.LoginRequest;
-import com.example.kkproj.model.UserVo;
+import com.example.kkproj.presentation.dto.JoinRequest;
+import com.example.kkproj.presentation.dto.LoginRequest;
+import com.example.kkproj.domain.UserVo;
 import com.example.kkproj.properties.JwtProperties;
-import com.example.kkproj.service.TokenService;
-import com.example.kkproj.service.UserService;
-import com.example.kkproj.util.CookieSupport;
+import com.example.kkproj.application.TokenService;
+import com.example.kkproj.application.UserService;
+import com.example.kkproj.infrastructure.config.cookie.CookieSupport;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;

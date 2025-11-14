@@ -1,4 +1,4 @@
-package com.example.kkproj.config.filter;
+package com.example.kkproj.infrastructure.config.filter;
 
 import com.example.kkproj.presentation.dto.CachedBodyHttpServletRequest;
 import jakarta.servlet.*;

@@ -1,4 +1,4 @@
-package com.example.kkproj.model.entity;
+package com.example.kkproj.domain.entity;
 
 
 import jakarta.persistence.*;

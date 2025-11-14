@@ -1,4 +1,4 @@
-package com.example.kkproj.infrastructure;
+package com.example.kkproj.infrastructure.db;
 
 import com.example.kkproj.domain.ShortenUrl;
 import com.example.kkproj.domain.ShortenUrlRepository;

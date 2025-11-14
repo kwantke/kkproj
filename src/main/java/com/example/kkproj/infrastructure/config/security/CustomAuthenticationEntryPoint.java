@@ -1,4 +1,4 @@
-package com.example.kkproj.config.security;
+package com.example.kkproj.infrastructure.config.security;
 
 import com.example.kkproj.domain.exception.ErrorCode;
 import jakarta.servlet.ServletException;

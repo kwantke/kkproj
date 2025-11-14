@@ -1,4 +1,4 @@
-package com.example.kkproj.dto;
+package com.example.kkproj.presentation.dto;
 
 import lombok.Data;
 

@@ -1,10 +1,10 @@
-package com.example.kkproj.service;
+package com.example.kkproj.application;
 
-import com.example.kkproj.dto.JoinRequest;
-import com.example.kkproj.dto.LoginRequest;
-import com.example.kkproj.model.UserVo;
-import com.example.kkproj.model.entity.UserEntity;
-import com.example.kkproj.repository.UserRepository;
+import com.example.kkproj.presentation.dto.JoinRequest;
+import com.example.kkproj.presentation.dto.LoginRequest;
+import com.example.kkproj.domain.UserVo;
+import com.example.kkproj.domain.entity.UserEntity;
+import com.example.kkproj.infrastructure.db.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

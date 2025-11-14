@@ -1,7 +1,7 @@
-package com.example.kkproj.repository;
+package com.example.kkproj.infrastructure.db;
 
 
-import com.example.kkproj.model.entity.UserEntity;
+import com.example.kkproj.domain.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

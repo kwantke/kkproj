@@ -1,4 +1,4 @@
-package com.example.kkproj.config.redis;
+package com.example.kkproj.infrastructure.config.redis;
 
 import com.example.kkproj.properties.JwtProperties;
 import lombok.RequiredArgsConstructor;

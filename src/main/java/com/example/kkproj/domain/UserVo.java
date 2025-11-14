@@ -1,6 +1,6 @@
-package com.example.kkproj.model;
+package com.example.kkproj.domain;
 
-import com.example.kkproj.model.entity.UserEntity;
+import com.example.kkproj.domain.entity.UserEntity;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

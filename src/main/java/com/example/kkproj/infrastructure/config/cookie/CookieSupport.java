@@ -1,4 +1,4 @@
-package com.example.kkproj.util;
+package com.example.kkproj.infrastructure.config.cookie;
 
 import com.example.kkproj.properties.JwtProperties;
 import jakarta.servlet.http.Cookie;

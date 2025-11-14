@@ -1,4 +1,4 @@
-package com.example.kkproj.model;
+package com.example.kkproj.domain;
 
 public enum UserRole {
   ADMIN,

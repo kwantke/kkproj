@@ -1,9 +1,8 @@
-package com.example.kkproj.config.filter;
+package com.example.kkproj.infrastructure.config.filter;
 
-import com.example.kkproj.config.redis.TokenStore;
-import com.example.kkproj.model.UserVo;
-import com.example.kkproj.service.UserService;
-import com.example.kkproj.util.JwtProvider;
+import com.example.kkproj.infrastructure.config.redis.TokenStore;
+import com.example.kkproj.application.UserService;
+import com.example.kkproj.infrastructure.config.jwt.JwtProvider;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;

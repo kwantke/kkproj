@@ -1,6 +1,6 @@
-package com.example.kkproj.config.security;
+package com.example.kkproj.infrastructure.config.security;
 
-import com.example.kkproj.config.filter.JwtAuthFilter;
+import com.example.kkproj.infrastructure.config.filter.JwtAuthFilter;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

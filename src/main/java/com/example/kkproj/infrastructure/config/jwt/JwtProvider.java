@@ -1,7 +1,7 @@
-package com.example.kkproj.util;
+package com.example.kkproj.infrastructure.config.jwt;
 
 
-import com.example.kkproj.model.UserVo;
+import com.example.kkproj.domain.UserVo;
 import com.example.kkproj.properties.JwtProperties;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
